@@ -4,6 +4,7 @@ Uma classe genérica que sabe realizar os mais importantes algoritimos, tais com
 
 - Ordenação:
     - Selection Sort;
+    - Counting Sort;
 - Busca:
     - Sequencial;
     - Binária;

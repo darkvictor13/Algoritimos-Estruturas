@@ -7,6 +7,19 @@ private:
     T *dados; // Vetor de dados para qualquer tipo
     uint32_t tam; // ultimo elemento valido
     uint32_t max_tam; // quantidade maxima possivel
+
+    uint32_t buscaBinariaRec(int inicio, int fim, T info) {
+        if (inicio == fim - 1)
+            return (uint32_t)fim;
+        else {
+            int meio = (inicio + fim) / 2;
+            if (dados[meio] < info) {
+                return buscaBinariaRec(meio, fim, info);
+            }
+            return buscaBinariaRec(inicio, meio, info);
+        }
+    }
+
 public:
     Vetor() {
         std::cout << "Iniciando o Objeto vetor" << std::endl;
@@ -83,6 +96,20 @@ public:
             }
         }
         return maior;
+    }
+
+    //============ Métodos de busca ============//
+    uint32_t buscaSequencial(T elemento) {
+        for(int i = 0; i <= tam; i++) {
+            if (elemento == dados[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    uint32_t buscaBinaria(T dado) {
+        return buscaBinariaRec(-1, tam + 1, dado);
     }
 
     //============ Métodos de ordenação ============//

@@ -12,5 +12,9 @@ int main () {
     cout << "Tamanho do vetor = " << p.getUsedTam() << endl;
     p.countingSort(10);
     cout << "p ordenado: " << p;
+
+    for(int i = 0; i < 5; i++) {
+        cout << p.buscaBinaria(p[i]) << '\n';
+    }
     return 0;
 }
