@@ -11,17 +11,13 @@ int main (int argc, char *argv[]) {
     lista.insereOrdenado(6);
     lista.insereOrdenado(2);
 
-    std::cout << "[ ";
-    for(auto it = lista.inicio(); it; it = it->proximo) {
-        std::cout << it->dado << ' ';
-    }
-    std::cout << "]\n";
+    lista.mostrar(" ", true);
 
     lista.retiraFim();
     lista.retiraInicio();
     lista.retira(3);
     std::cout << "[ ";
-    for(auto it = lista.inicio(); it; it = it->proximo) {
+    for(auto *it = lista.inicio(); it; it = it->proximo) {
         std::cout << it->dado << ' ';
     }
     std::cout << "]\n";

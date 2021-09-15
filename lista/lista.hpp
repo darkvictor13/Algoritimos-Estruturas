@@ -85,22 +85,26 @@ namespace stl_br {
                 }
 
             public:
-                Lista() {
-                    this->cabeca = nullptr;
-                    this->cauda = nullptr;
-                }
+                Lista() : cabeca(nullptr), cauda(nullptr) {}
 
-                Lista(const Lista<T> &outra) {
-                    for(auto it = outra.cabeca; it; it = it->proximo) {
+                Lista(const Lista<T> &outra) : cabeca(nullptr), cauda(nullptr) {
+                    for(No<T> *it = outra.cabeca; it; it = it->proximo) {
                         this->insereFim(it->dado);
                     }
                 }
 
-                bool isVazia() {
+                const Lista<T> & operator=(const Lista<T> outra) {
+                    if (!isVazia()) {
+                        limpar();
+                    }
+                    return outra;
+                }
+
+                bool isVazia() const {
                     return (this->cabeca == nullptr);
                 }
 
-                No<T> *naPos(int num) {
+                No<T> *naPos(int num) const {
                     int pos = 0;
                     auto p = this->cabeca;
                     while (p) {
@@ -113,7 +117,7 @@ namespace stl_br {
                     return nullptr;
                 }
 
-                bool operator != (const Lista<T> &other) {
+                bool operator != (const Lista<T> &other) const {
                     auto atual = this->cabeca;
                     auto outra = other.cabeca;
                     while (atual && outra) {
@@ -126,15 +130,15 @@ namespace stl_br {
                     return false;
                 }
 
-                bool operator == (const Lista<T> &other) {
+                bool operator == (const Lista<T> &other) const {
                     return !(*this != other);
                 }
 
-                auto inicio() {
+                auto inicio() const {
                     return this->cabeca;
                 }
 
-                auto fim() {
+                auto fim() const {
                     return this->cauda;
                 }
 
@@ -212,7 +216,8 @@ namespace stl_br {
                     desencadeia(acha(dado));
                 }
 
-                void mostrar(const std::string sep) {
+                void mostrar(const std::string &sep,
+                                bool endline = false) const {
                     if (isVazia()) {
                         std::cout << "Lista Vazia\n";
                         return;
@@ -223,7 +228,7 @@ namespace stl_br {
                         std::cout << percorre->dado << sep;
                         percorre = percorre->proximo;
                     }
-                    std::cout << percorre->dado << "\n";
+                    std::cout << percorre->dado << (endline? "\n" : "");
                 }
 
                 void mostrarInvertido() {
@@ -240,7 +245,7 @@ namespace stl_br {
                     std::cout << percorre->dado << '\n';
                 }
 
-                int tam() {
+                int tam() const {
                     if (isVazia()) {
                         return 0;
                     }
@@ -253,7 +258,7 @@ namespace stl_br {
                     return qnt;
                 }
 
-                No<T> *acha(T dado) {
+                No<T> *acha(T dado) const {
                     if (isVazia()) {
                         return nullptr;
                     }
@@ -268,7 +273,6 @@ namespace stl_br {
                     delete cabeca;
                     cabeca = cauda = nullptr;
                 }
-
 
                 ~Lista() {
                     delete cabeca;
